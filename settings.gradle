@@ -1,0 +1,3 @@
+include ':premaderecyclerview'
+include ':app'
+rootProject.name = "PremadeRecyclerView"
