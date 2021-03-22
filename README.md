@@ -88,6 +88,8 @@ ListView.builder(
 
 #### This is it. With it we can show multiple view according to the index of item. 
 
+<img src="Media/demo.gif"/>
+
 ### This is just a component and opensource. You can modify and use it or contribute to make it better.
 
 ### Most importantly this will save a lot of time in development :D
