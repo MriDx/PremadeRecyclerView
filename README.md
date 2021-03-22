@@ -90,6 +90,28 @@ ListView.builder(
 
 <img src="Media/demo.gif"/>
 
+##
+## Add it to android studio project
+
+### In project's build.gradle
+``` gradle
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	}
+}
+```
+
+### In  app level build.gradle
+``` gradle
+dependencies {
+  ...
+  implementation 'com.github.mridx:PremadeRecyclerView:1.0-beta'
+
+}
+```
+
 ### This is just a component and opensource. You can modify and use it or contribute to make it better.
 
 ### Most importantly this will save a lot of time in development :D
