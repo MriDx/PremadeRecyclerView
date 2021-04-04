@@ -48,7 +48,7 @@ dependencies {
 #### Step 1 -
 In XML Layout, replace ***RecyclerView*** with **PremadeRecyclerView** 
 ```XML
-	<com.mridx.premaderecyclerview.PremadeRecyclerView
+<com.mridx.premaderecyclerview.PremadeRecyclerView
         android:id="@+id/premadeRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
