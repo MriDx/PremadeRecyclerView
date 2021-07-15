@@ -2,6 +2,7 @@ package com.mridx.premaderecyclerviewexample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -53,12 +54,14 @@ class MainActivity : AppCompatActivity() {
                 addMoreItems(10)
             }
             itemBuilder = { parent, index ->
-                ItemviewType1Binding.inflate(layoutInflater, parent, false).apply {
+                ItemviewType1Binding.inflate(layoutInflater, parent, false).root
+            }
+            itemBinding { holder, index ->
+                ItemviewType1Binding.bind(holder.itemView).apply {
                     textView.text = "${list[index].name} $index"
                     root.setOnClickListener {
                         list[index].selected = !list[index].selected
                         itemSetChanged()
-                        //getAdapter.notifyDataSetChanged()
                     }
                     if (list[index].selected) {
                         root.setBackgroundColor(
@@ -75,7 +78,7 @@ class MainActivity : AppCompatActivity() {
                             )
                         )
                     }
-                }.root
+                }
             }
         }.render()
 
