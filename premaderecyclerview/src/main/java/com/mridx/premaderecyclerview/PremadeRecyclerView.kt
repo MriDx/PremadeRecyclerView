@@ -24,6 +24,16 @@ class PremadeRecyclerView : RecyclerView {
             premadeRecyclerAdapter.itemBuilderWithItem(field!!)
         }
 
+    var binding: ((holder: ViewHolder, index: Int) -> Unit)? = null
+        set(value) {
+            field = value
+            premadeRecyclerAdapter.itemBinding(field!!)
+        }
+
+    fun itemBinding(builder: ((holder: ViewHolder, index: Int) -> Unit)) {
+        this.binding = builder
+    }
+
     fun onLastItemScrolled(lastItemScrolled: ((position: Int) -> Unit)) {
         premadeRecyclerAdapter.lastItemScrolled(lastItemScrolled)
     }
@@ -31,6 +41,9 @@ class PremadeRecyclerView : RecyclerView {
     private val premadeRecyclerAdapter by lazy {
         PremadeRecyclerAdapter()
     }
+
+    val getAdapter get() = premadeRecyclerAdapter
+
 
     constructor(context: Context) : super(context) {
         render(context, null, 0)
@@ -124,7 +137,11 @@ class PremadeRecyclerView : RecyclerView {
     /**
      * Simple adapter specific function to notify the adapter that its associated data set has changed
      */
-    fun itemSetChanged() = post { premadeRecyclerAdapter.notifyDataSetChanged() }
+    fun itemSetChanged() = post {
+        /*adapter = null
+        adapter = premadeRecyclerAdapter*/
+        premadeRecyclerAdapter.notifyDataSetChanged()
+    }
 
     /**
      * Simple adapter specific function to notify the adapter that an item
@@ -209,6 +226,11 @@ class PremadeRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         this.builderWithItem = builder
     }
 
+    private var binding: ((holder: RecyclerView.ViewHolder, index: Int) -> Unit)? = null
+    fun itemBinding(builder: ((holder: RecyclerView.ViewHolder, index: Int) -> Unit)) {
+        this.binding = builder
+    }
+
     private var lastItemScrolled: ((position: Int) -> Unit)? = null
     fun lastItemScrolled(listener: ((position: Int) -> Unit)) {
         this.lastItemScrolled = listener
@@ -249,6 +271,7 @@ class PremadeRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        binding?.invoke(holder, position)
         if (itemList.isEmpty()) {
             if (position == items - 1) {
                 lastItemScrolled?.invoke(position)

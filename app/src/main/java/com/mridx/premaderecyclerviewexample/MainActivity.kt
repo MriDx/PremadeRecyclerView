@@ -2,9 +2,11 @@ package com.mridx.premaderecyclerviewexample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.mridx.premaderecyclerviewexample.databinding.ActivityMainBinding
 import com.mridx.premaderecyclerviewexample.databinding.ItemviewType1Binding
 import com.mridx.premaderecyclerviewexample.databinding.ItemviewType2Binding
@@ -21,6 +23,20 @@ class MainActivity : AppCompatActivity() {
         list
     }
 
+    data class Test(var name: String, var selected: Boolean = false)
+
+    private val list = arrayListOf(
+        Test("Mridul"),
+        Test("Rupam"),
+        Test("Sumit"),
+        Test("Milan"),
+        Test("Jitu"),
+        Test("Moni"),
+        Test("Goutam"),
+        Test("Bhrigu"),
+        Test("Jyoti"),
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,6 +46,43 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.premadeRecyclerView.apply {
+            setItemCount(list.size)
+            onLastItemScrolled {
+                for (i in 0 until 10) {
+                    list.add(Test("Dynamic "))
+                }
+                addMoreItems(10)
+            }
+            itemBuilder = { parent, index ->
+                ItemviewType1Binding.inflate(layoutInflater, parent, false).root
+            }
+            itemBinding { holder, index ->
+                ItemviewType1Binding.bind(holder.itemView).apply {
+                    textView.text = "${list[index].name} $index"
+                    root.setOnClickListener {
+                        list[index].selected = !list[index].selected
+                        itemSetChanged()
+                    }
+                    if (list[index].selected) {
+                        root.setBackgroundColor(
+                            ContextCompat.getColor(
+                                this@MainActivity,
+                                R.color.purple_500
+                            )
+                        )
+                    } else {
+                        root.setBackgroundColor(
+                            ContextCompat.getColor(
+                                this@MainActivity,
+                                R.color.white
+                            )
+                        )
+                    }
+                }
+            }
+        }.render()
+
+        /*binding.premadeRecyclerView.apply {
             this.setItemCount(15) //initially pass items count
             this.onLastItemScrolled {
                 // last item is scrolled, load more data or show there's no more new data :D
@@ -73,7 +126,7 @@ class MainActivity : AppCompatActivity() {
         }.also {
             //render must call after assigning itemBuilder
             it.render()
-        }
+        }*/
 
 
         /**
