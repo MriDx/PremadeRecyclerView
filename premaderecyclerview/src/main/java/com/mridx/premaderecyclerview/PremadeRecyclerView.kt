@@ -32,6 +32,9 @@ class PremadeRecyclerView : RecyclerView {
         PremadeRecyclerAdapter()
     }
 
+    val getAdapter get() = premadeRecyclerAdapter
+
+
     constructor(context: Context) : super(context) {
         render(context, null, 0)
     }
@@ -124,7 +127,11 @@ class PremadeRecyclerView : RecyclerView {
     /**
      * Simple adapter specific function to notify the adapter that its associated data set has changed
      */
-    fun itemSetChanged() = post { premadeRecyclerAdapter.notifyDataSetChanged() }
+    fun itemSetChanged() = post {
+        adapter = null
+        adapter = premadeRecyclerAdapter
+        //premadeRecyclerAdapter.notifyDataSetChanged()
+    }
 
     /**
      * Simple adapter specific function to notify the adapter that an item
