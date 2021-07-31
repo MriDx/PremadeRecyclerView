@@ -1,4 +1,4 @@
-# PremadeRecyclerView [2.0-beta01](https://github.com/MriDx/PremadeRecyclerView/releases/tag/2.0-beta01)
+# PremadeRecyclerView [2.0-beta02](https://github.com/MriDx/PremadeRecyclerView/releases/tag/2.0-beta02)
 
 **PemadeRecyclerView** is a ready-made recyclerview. It simplifies the list rendering process and speed-up development.
 
@@ -35,7 +35,7 @@ Add *PremadeRecyclerView* dependency to app's `build.gradle` file
 ```gradle
 dependencies {
   ...
-  implementation 'com.github.mridx:PremadeRecyclerView:2.0-beta01'
+  implementation 'com.github.mridx:PremadeRecyclerView:2.0-beta02'
 }
 ```
 
@@ -58,12 +58,12 @@ In XML Layout, replace ***RecyclerView*** with **PremadeRecyclerView**
 In Activity or Fragment -
 ```kotlin
 binding.premadeRecyclerView.apply {
-            this.setItemCount(15) //pass items count
-            this.onLastItemScrolled {
+            setItemCount(15) //pass items count
+            onLastItemScrolled {
                 // last item is scrolled, load more data or show there's no more new data :D
                 this.addMoreItems(count =  10) // it will increase item count by the passed value
             }
-            this.itemBuilder = { parent, index ->
+            itemBuilder = { parent, index ->
                     ItemviewType1Binding.inflate(layoutInflater, parent, false).apply {
                         this.textView.text = "this is a view type 1"
                         this.root.setOnClickListener {
