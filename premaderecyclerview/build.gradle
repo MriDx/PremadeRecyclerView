@@ -3,6 +3,28 @@ plugins {
     id 'kotlin-android'
 }
 
+ext {
+    PUBLISH_GROUP_ID = 'io.github.mridx'
+    PUBLISH_VERSION = '1.1'
+    PUBLISH_ARTIFACT_ID = 'PremadeRecyclerView'
+    PUBLISH_DESCRIPTION = 'PremadeRecyclerView Android Library'
+    PUBLISH_URL = 'https://github.com/mridx/PremadeRecyclerView'
+    PUBLISH_LICENSE_NAME = 'Apache License'
+    PUBLISH_LICENSE_URL =
+            'https://github.com/mridx/PremadeRecyclerView/blob/master/LICENSE.txt'
+    PUBLISH_DEVELOPER_ID = 'mridx'
+    PUBLISH_DEVELOPER_NAME = 'Mridul Baishya'
+    PUBLISH_DEVELOPER_EMAIL = 'mridulbaishya28@gmail.com'
+    PUBLISH_SCM_CONNECTION =
+            'scm:git:github.com/mridx/PremadeRecyclerView.git'
+    PUBLISH_SCM_DEVELOPER_CONNECTION =
+            'scm:git:ssh://github.com/mridx/PremadeRecyclerView.git'
+    PUBLISH_SCM_URL =
+            'https://github.com/mridx/PremadeRecyclerView/tree/master'
+}
+
+apply from: "${rootProject.projectDir}/scripts/publish-module.gradle"
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"

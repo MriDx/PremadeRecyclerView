@@ -77,7 +77,13 @@ class PremadeRecyclerView : RecyclerView {
      */
     fun addMoreItems(count: Int) {
         premadeRecyclerAdapter.items += count
-        post { premadeRecyclerAdapter.notifyDataSetChanged() }
+        post { premadeRecyclerAdapter.notifyItemInserted(premadeRecyclerAdapter.items - count) }
+    }
+
+    fun addMoreItems(count: Int, notify: Boolean) {
+        premadeRecyclerAdapter.items += count
+        if (notify)
+            post { premadeRecyclerAdapter.notifyItemInserted(premadeRecyclerAdapter.items - count) }
     }
 
     /**
@@ -89,7 +95,7 @@ class PremadeRecyclerView : RecyclerView {
      */
     fun setItemCount(count: Int) = run {
         premadeRecyclerAdapter.items = count
-        post { premadeRecyclerAdapter.notifyDataSetChanged() }
+        post { premadeRecyclerAdapter.notifyItemRangeInserted(0, count) }
     }
 
     /**
@@ -138,8 +144,6 @@ class PremadeRecyclerView : RecyclerView {
      * Simple adapter specific function to notify the adapter that its associated data set has changed
      */
     fun itemSetChanged() = post {
-        /*adapter = null
-        adapter = premadeRecyclerAdapter*/
         premadeRecyclerAdapter.notifyDataSetChanged()
     }
 
