@@ -77,13 +77,22 @@ class PremadeRecyclerView : RecyclerView {
      */
     fun addMoreItems(count: Int) {
         premadeRecyclerAdapter.items += count
-        post { premadeRecyclerAdapter.notifyItemInserted(premadeRecyclerAdapter.items - count) }
+        post {
+            premadeRecyclerAdapter.notifyItemRangeInserted(
+                premadeRecyclerAdapter.items - count,
+                count
+            )
+        }
     }
 
     fun addMoreItems(count: Int, notify: Boolean) {
         premadeRecyclerAdapter.items += count
         if (notify)
-            post { premadeRecyclerAdapter.notifyItemInserted(premadeRecyclerAdapter.items - count) }
+            post {
+                premadeRecyclerAdapter.notifyItemRangeInserted(
+                    premadeRecyclerAdapter.items - count, count
+                )
+            }
     }
 
     /**
@@ -95,7 +104,6 @@ class PremadeRecyclerView : RecyclerView {
      */
     fun setItemCount(count: Int) = run {
         premadeRecyclerAdapter.items = count
-        post { premadeRecyclerAdapter.notifyItemRangeInserted(0, count) }
     }
 
     /**

@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.premadeRecyclerView.apply {
-            setItemCount(list.size)
+            setItemCount(0)
             onLastItemScrolled {
                 for (i in 0 until 10) {
                     list.add(Test("Dynamic "))
@@ -81,6 +81,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }.render()
+
+        genItems()
 
         /*binding.premadeRecyclerView.apply {
             this.setItemCount(15) //initially pass items count
@@ -160,5 +162,12 @@ class MainActivity : AppCompatActivity() {
         //endregion
 
 
+    }
+
+    private fun genItems() {
+        for (i in 0 until 10) {
+            list.add(Test("Dynamic "))
+        }
+        binding.premadeRecyclerView.addMoreItems(10)
     }
 }
