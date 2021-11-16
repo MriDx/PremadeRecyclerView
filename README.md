@@ -1,4 +1,4 @@
-# PremadeRecyclerView [2.0-beta02](https://github.com/MriDx/PremadeRecyclerView/releases/tag/2.0-beta02)
+# PremadeRecyclerView [1.3](https://ossindex.sonatype.org/component/pkg:maven/io.github.mridx/PremadeRecyclerView@1.3)
 
 **PemadeRecyclerView** is a ready-made recyclerview. It simplifies the list rendering process and speed-up development.
 
@@ -25,7 +25,7 @@ Add jitpack.io to project's `build.gradle` file
 allprojects {
 	repositories {
 		...
-		maven { url 'https://jitpack.io' }
+		mavenCentral()
 	}
 }
 ```
@@ -35,7 +35,7 @@ Add *PremadeRecyclerView* dependency to app's `build.gradle` file
 ```gradle
 dependencies {
   ...
-  implementation 'com.github.mridx:PremadeRecyclerView:2.0-beta02'
+  implementation("io.github.mridx:PremadeRecyclerView:1.3")
 }
 ```
 
